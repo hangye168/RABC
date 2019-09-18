@@ -1,0 +1,19 @@
+package com.web.service.impl;
+
+import com.web.dao.DemoDao;
+import com.web.model.Demo;
+import com.web.query.DemoQuery;
+import com.web.service.DemoService;
+
+public class DemoServiceImpl extends BaseServiceImpl<Demo, DemoQuery> implements DemoService {
+
+	private DemoDao demoDao;
+	
+	public void setDemoDao(DemoDao demoDao) {
+		this.demoDao = demoDao;
+		this.baseDao = demoDao;
+	}
+	
+	
+
+}

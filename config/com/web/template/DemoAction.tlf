@@ -1,0 +1,54 @@
+package com.web.controller;
+
+import java.util.List;
+
+import com.web.model.Demo;
+import com.web.query.DemoQuery;
+import com.web.service.DemoService;
+import com.web.utils.Page;
+
+import com.opensymphony.xwork2.ActionContext;
+
+public class DemoAction extends BaseAction {
+	
+	private DemoQuery query = new DemoQuery();
+	
+	private DemoService demoService;
+	
+	public String demo_list(){	
+		ActionContext context = ActionContext.getContext();	
+		Integer pageNo = query.getPageNo();
+		if(pageNo == null || pageNo <= 1){
+			query.setPageNo(1);
+		}	
+		Page page = demoService.queryObjByCondition(query, exclude);	
+		context.put("page", page);
+		return SUCCESS;
+	}
+	
+	public String demo_input(){
+		return SUCCESS;
+	}
+	
+	/**
+	 * 所有的get和set方法
+	 * -----------------------------------------------------------------
+	 * @return
+	 */
+	public DemoQuery getQuery() {
+		return query;
+	}
+
+	public void setQuery(DemoQuery query) {
+		this.query = query;
+	}
+	
+	public DemoService getDemoService() {
+		return demoService;
+	}
+
+	public void setDemoService(DemoService demoService) {
+		this.demoService = demoService;
+	}
+	
+}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           ">
+ <!-- 配置数据源 配置数据库连接池dhcp  apache的数据库连接池-->
+	<context:property-placeholder location="classpath:db.properties"/>
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${driver}"></property>
+		<property name="url" value="${url}"></property>
+     	<property name="username" value="${uname}"></property>
+    	<property name="password" value="${pword}"></property>
+      	<property name="initialSize" value="${initialSize}"></property>
+      	<property name="maxActive" value="${maxActive}"></property>
+      	<property name="maxIdle" value="${maxIdle}"></property>
+      	<property name="minIdle" value="${minIdle}"></property>
+	</bean>
+<!-- 配置sessionFactory 负责创建Session的核心接口-->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<!-- 读取数据库的配置文件 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 读取hibernate的配置文件 -->
+		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+	</bean>
+	
+<!-- 事务管理器 对于一系列数据库操作进行管理 声明Hibernate的事务-->	
+<!-- 保证一系列动作当成一个独立的工作单元 ACID -->
+	<bean id="txManage" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+<!-- 配置切面 -->		
+	<tx:advice id="txAdvice" transaction-manager="txManage">
+		<tx:attributes>
+		<!-- REQUIRED 如果有事务在运行，当前的方法就在这个事务内运行，
+		否则就开启一个新的事务，并在自己的事务内运行,默认传播行为 -->
+			<tx:method name="submit*" propagation="REQUIRED"/>
+      		<tx:method name="save*" propagation="REQUIRED"/>
+      		<tx:method name="update*" propagation="REQUIRED"/>
+      		<tx:method name="delete*" propagation="REQUIRED"/>
+      		<tx:method name="add*" propagation="REQUIRED"/>
+      		<tx:method name="modify*" propagation="REQUIRED"/>
+      		<tx:method name="remove*" propagation="REQUIRED"/>
+      		<tx:method name="get*" read-only="true"/>
+      		<tx:method name="query*" read-only="true"/>
+      	</tx:attributes>
+	</tx:advice>
+<!-- aop切面 拦截下来管理事务 -->		
+	<aop:config>
+		<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.web.service..*.*(..))"/>
+	</aop:config>
+	
+	<import resource="classpath:ApplicationContext-dao.xml"/>
+	<import resource="classpath:ApplicationContext-action.xml"/>
+	<import resource="classpath:ApplicationContext-service.xml"/>
+</beans>

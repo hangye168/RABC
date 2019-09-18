@@ -1,0 +1,8 @@
+package com.web.dao;
+
+import com.web.model.Demo;
+import com.web.query.DemoQuery;
+
+public interface DemoDao extends BaseDao<Demo, DemoQuery>{
+	
+}

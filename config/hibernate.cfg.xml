@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+
+<session-factory>
+	<property name="show_sql">true</property>
+	<property name="dialect">
+		org.hibernate.dialect.MySQLDialect
+	</property>
+	<property name="hbm2ddl.auto">update</property>
+	<mapping resource="com/web/mapper/Emp.hbm.xml" />
+	<mapping resource="com/web/mapper/Dep.hbm.xml" />
+	<mapping resource="com/web/mapper/Supplier.hbm.xml" />
+	<mapping resource="com/web/mapper/ProductType.hbm.xml" />
+	<mapping resource="com/web/mapper/Role.hbm.xml" />
+	<mapping resource="com/web/mapper/Product.hbm.xml" />
+	<mapping resource="com/web/mapper/OrderModel.hbm.xml" />
+	<mapping resource="com/web/mapper/OrderDetail.hbm.xml" />
+	<mapping resource="com/web/mapper/ConsoleLog.hbm.xml" />
+	<mapping resource="com/web/mapper/Store.hbm.xml" />
+	<mapping resource="com/web/mapper/StoreDetail.hbm.xml" />
+	<mapping resource="com/web/mapper/Menu.hbm.xml" />
+</session-factory>
+
+
+</hibernate-configuration>

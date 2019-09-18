@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="http://www.springframework.org/schema/beans            http://www.springframework.org/schema/beans/spring-beans.xsd            http://www.springframework.org/schema/context            http://www.springframework.org/schema/context/spring-context.xsd            http://www.springframework.org/schema/tx            http://www.springframework.org/schema/tx/spring-tx.xsd            http://www.springframework.org/schema/aop            http://www.springframework.org/schema/aop/spring-aop.xsd            ">  
+  <bean id="empDao" class="com.web.dao.impl.EmpdaoImpl"> 
+    <property name="sessionFactory" ref="sessionFactory"/> 
+  </bean>  
+  <bean id="depDao" class="com.web.dao.impl.DepdaoImpl"> 
+    <property name="sessionFactory" ref="sessionFactory"/> 
+  </bean>  
+  <bean id="roleDao" class="com.web.dao.impl.RoleDaoImpl"> 
+    <property name="sessionFactory" ref="sessionFactory"/> 
+  </bean>  
+  <bean id="supplierDao" class="com.web.dao.impl.SupplierDaoImpl"> 
+    <property name="sessionFactory" ref="sessionFactory"/> 
+  </bean>  
+  <bean id="productTypeDao" class="com.web.dao.impl.ProductTypeDaoImpl"> 
+    <property name="sessionFactory" ref="sessionFactory"/> 
+  </bean>  
+  <bean id="productDao" class="com.web.dao.impl.ProductDaoImpl"> 
+    <property name="sessionFactory" ref="sessionFactory"/> 
+  </bean>  
+  <bean id="orderModelDao" class="com.web.dao.impl.OrderModelDaoImpl"> 
+    <property name="sessionFactory" ref="sessionFactory"/> 
+  </bean>  
+  <bean id="orderDetailDao" class="com.web.dao.impl.OrderDetailDaoImpl"> 
+    <property name="sessionFactory" ref="sessionFactory"/> 
+  </bean>  
+  <bean id="consoleLogDao" class="com.web.dao.impl.ConsoleLogDaoImpl"> 
+    <property name="sessionFactory" ref="sessionFactory"/> 
+  </bean>  
+  <bean id="storeDao" class="com.web.dao.impl.StoreDaoImpl"> 
+    <property name="sessionFactory" ref="sessionFactory"/> 
+  </bean>  
+  <bean id="storeDetailDao" class="com.web.dao.impl.StoreDetailDaoImpl"> 
+    <property name="sessionFactory" ref="sessionFactory"/> 
+  </bean>  
+  <bean id="menuDao" class="com.web.dao.impl.MenuDaoImpl">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+</beans>
